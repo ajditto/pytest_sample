@@ -3,6 +3,7 @@ from library.zip_codes import german_city, grand_rapids
 
 class TestZipAPI:
 
+    # This test uses no external sources for data
     def test_get_south_jordan_zip(self, api, zipper):
         req = zipper.get(f'{api}.us/us/84095')
         res = req.json()
@@ -15,6 +16,7 @@ class TestZipAPI:
         cities_in_zip = [place['place name'] for place in places]
         assert 'South Jordan' in cities_in_zip
 
+    # This test uses no external sources for data
     def test_get_canadian_zip(self, api, zipper):
         zip_code = 'T1M'
         req = zipper.get(f'{api}.us/ca/{zip_code}')
@@ -27,6 +29,8 @@ class TestZipAPI:
         cities_in_zip = [place['place name'] for place in places]
         assert 'Coaldale' in cities_in_zip
 
+    # This test uses data created in a helper function to retrieve data.  
+    # path: /library/zip_codes: grand_rapids()
     def test_get_grand_rapids(self, api, zipper):
         data = grand_rapids()
         req = zipper.get(f'{api}.us/us/{data.get('post_code')}')
@@ -39,6 +43,8 @@ class TestZipAPI:
         cities_in_zip = [place['place name'] for place in places]
         assert data.get('places')[0].get('place name') in cities_in_zip
 
+    # This test uses data created in a helper function to retrieve data
+    # path: /library//zip_codes: german_city()
     def test_get_german_city(self, api, zipper):
         data = german_city()
         req = zipper.get(f'{api}.us/de/{data.get('post_code')}')
