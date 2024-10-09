@@ -1,3 +1,7 @@
+# This file contains data for multiple zip codes and is inteded to be used
+# in various tests where having the data pre-made would be more convenient 
+# than creating it for each individual test
+
 def temple_hill():
     data = {
         'post_code': '20748',
